@@ -26,13 +26,11 @@ function ActionControl({ groupId }: ActionControlProps) {
       message_type: messageTypes.user,
     };
     const response = await httpPost('/message/create', payload);
-    if (response.message) {
-      setMessage('');
-    }
+    if (response.message) setMessage('');
   };
 
   return (
-    <div className="absolute bg-white w-[820px] left-5 bottom-3 rounded-md p-4 shadow-xl">
+    <div className="absolute bg-white w-[95%] left-5 bottom-3 rounded-md p-4 shadow-xl">
       <input
         type="text"
         className="outline-none w-full font-medium placeholder:text-sm"

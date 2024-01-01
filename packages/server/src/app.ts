@@ -10,7 +10,7 @@ import { errorConverter } from "./middlewares/error-converter";
 import ApiError from "./middlewares/api-error";
 import httpStatus from "http-status";
 
-// Load env file
+// configure dotenv
 dotenv.config();
 
 class App {
@@ -50,10 +50,12 @@ class App {
     this.app.use(errorConverter);
   }
 
+  // Connect to the database
   registerDatbase() {
     connectDB(process.env.MONGODB_URI || "");
   }
 
+  // Register socket connection
   registerSocket() {
     this.socket.socketConnection(this.http);
   }

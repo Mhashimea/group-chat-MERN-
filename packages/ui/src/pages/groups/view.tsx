@@ -21,7 +21,7 @@ function GroupView() {
   const { groups } = useSelector((state: any) => state.groups);
 
   const [group, setGroup] = useState({} as GroupsI);
-  const [messages, setMessages] = useState([] as MessageI[]);
+  const [messages, setMessages] = useState([] as { _id: string; messages: MessageI[] }[]);
   const [page, setPage] = useState(1);
   const [meta, setMeta] = useState({} as any);
   const [loading, setLoading] = useState(false);
@@ -43,7 +43,7 @@ function GroupView() {
   const bindBroadcastMsg = (data: any) => {
     // append new message to messages last array and push to state
     const messagesClone = [...messages];
-    messagesClone[messagesClone.length - 1].messages.push(data);
+    messagesClone[messagesClone.length - 1]?.messages.push(data);
     setMessages(messagesClone);
 
     // save last message to group
@@ -102,7 +102,7 @@ function GroupView() {
   }, [id]);
   return (
     <GroupLayout>
-      <div className="w-9/12 bg-gray-100 overflow-hidden">
+      <div className="w-9/12 bg-gray-100 overflow-hidden relative">
         <GroupHeader group={group} onSuccess={getGroupDetails} />
         <GroupMessages messages={messages} />
         <ActionControl groupId={id as string} />
